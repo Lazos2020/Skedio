@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Skedio — Offline</title>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        background: #121212;
+        color: #ffffff;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      }
+      .wrap {
+        min-height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 2rem calc(1.5rem + env(safe-area-inset-right)) 2rem calc(1.5rem + env(safe-area-inset-left));
+        box-sizing: border-box;
+      }
+      h1 { font-size: 1.25rem; margin: 0 0 0.5rem; }
+      p { font-size: 0.9rem; color: rgba(255, 255, 255, 0.6); max-width: 26rem; line-height: 1.5; margin: 0 0 1.5rem; }
+      button {
+        appearance: none;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: #ffffff;
+        color: #121212;
+        font-weight: 700;
+        font-size: 0.85rem;
+        padding: 0.75rem 1.5rem;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>You're offline</h1>
+      <p>
+        Skedio needs to load once while you're connected before it can work fully offline.
+        Reconnect and reopen the app to finish installing it for offline use.
+      </p>
+      <button onclick="location.reload()">Try Again</button>
+    </div>
+  </body>
+</html>

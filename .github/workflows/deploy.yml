@@ -1,0 +1,84 @@
+name: Deploy to GitHub Pages
+
+# Skedio's primary deployment target is Cloudflare Workers (see vite.config.ts
+# and .output/server/wrangler.json) because the project is built with
+# TanStack Start, an SSR framework — GitHub Pages can only serve static
+# files. This workflow builds a static export specifically for that: a
+# one-time HTML snapshot of the app shell plus all static assets. That's a
+# safe fit for this project because it has exactly one real page route and
+# no server functions — everything meaningful (IndexedDB, Canvas, the
+# service worker) already runs client-side after the page loads. See
+# scripts/export-static.mjs for exactly how the snapshot is produced, and
+# vite.config.ts's BUILD_TARGET=github-pages branch for the build-side half.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Only one Pages deployment at a time; let an in-progress run finish instead
+# of being cancelled by a newer push.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type-check
+        run: npx tsc --noEmit
+
+      - name: Compute base path
+        id: base
+        run: |
+          echo "path=/${{ github.event.repository.name }}/" >> "$GITHUB_OUTPUT"
+          echo "url=${{ github.event.repository.owner.login }}.github.io/${{ github.event.repository.name }}" >> "$GITHUB_OUTPUT"
+
+      - name: Build (static export for GitHub Pages)
+        env:
+          BUILD_TARGET: github-pages
+          PAGES_BASE_PATH: ${{ steps.base.outputs.path }}
+        run: npm run build
+
+      - name: Capture static HTML snapshot
+        env:
+          PAGES_BASE_PATH: ${{ steps.base.outputs.path }}
+          SITE_URL: https://${{ steps.base.outputs.url }}
+        run: node scripts/export-static.mjs
+
+      - name: Set up Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: .output/public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

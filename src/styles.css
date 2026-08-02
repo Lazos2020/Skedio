@@ -1,0 +1,294 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design system definition.
+ *
+ * The @theme inline block maps CSS custom properties to Tailwind utility
+ * classes (e.g. --color-primary -> bg-primary, text-primary).
+ *
+ * The :root and .dark blocks define the actual color values using oklch.
+ * All colors MUST use oklch format.
+ *
+ * To add a new semantic color:
+ * 1. Add the variable to :root (light value) and .dark (dark value)
+ * 2. Register it in @theme inline as --color-<name>: var(--<name>)
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.129 0.042 264.695);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.129 0.042 264.695);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.129 0.042 264.695);
+  --primary: oklch(0.208 0.042 265.755);
+  --primary-foreground: oklch(0.984 0.003 247.858);
+  --secondary: oklch(0.968 0.007 247.896);
+  --secondary-foreground: oklch(0.208 0.042 265.755);
+  --muted: oklch(0.968 0.007 247.896);
+  --muted-foreground: oklch(0.554 0.046 257.417);
+  --accent: oklch(0.968 0.007 247.896);
+  --accent-foreground: oklch(0.208 0.042 265.755);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.984 0.003 247.858);
+  --border: oklch(0.929 0.013 255.508);
+  --input: oklch(0.929 0.013 255.508);
+  --ring: oklch(0.704 0.04 256.788);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.984 0.003 247.858);
+  --sidebar-foreground: oklch(0.129 0.042 264.695);
+  --sidebar-primary: oklch(0.208 0.042 265.755);
+  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-accent: oklch(0.968 0.007 247.896);
+  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
+  --sidebar-border: oklch(0.929 0.013 255.508);
+  --sidebar-ring: oklch(0.704 0.04 256.788);
+}
+
+.dark {
+  --background: oklch(0.129 0.042 264.695);
+  --foreground: oklch(0.984 0.003 247.858);
+  --card: oklch(0.208 0.042 265.755);
+  --card-foreground: oklch(0.984 0.003 247.858);
+  --popover: oklch(0.208 0.042 265.755);
+  --popover-foreground: oklch(0.984 0.003 247.858);
+  --primary: oklch(0.929 0.013 255.508);
+  --primary-foreground: oklch(0.208 0.042 265.755);
+  --secondary: oklch(0.279 0.041 260.031);
+  --secondary-foreground: oklch(0.984 0.003 247.858);
+  --muted: oklch(0.279 0.041 260.031);
+  --muted-foreground: oklch(0.704 0.04 256.788);
+  --accent: oklch(0.279 0.041 260.031);
+  --accent-foreground: oklch(0.984 0.003 247.858);
+  --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: oklch(0.984 0.003 247.858);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.551 0.027 264.364);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.208 0.042 265.755);
+  --sidebar-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-accent: oklch(0.279 0.041 260.031);
+  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.551 0.027 264.364);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+  }
+}
+
+/* ---- Skedio tracing app ---- */
+@layer base {
+  body {
+    background-color: #121212;
+    color: #ffffff;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Oxygen, Ubuntu, Cantarell, sans-serif;
+    overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.25s ease-out forwards;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Overflow fade colors for horizontal scroll rows (DragScroll). These blend
+   the left/right fade edges into whichever surface the row sits on. */
+:root {
+  --skedio-fade-page: #121212;
+  --skedio-fade-card: #181818;
+}
+html.skedio-light {
+  --skedio-fade-page: #f4f4f5;
+  --skedio-fade-card: #ffffff;
+}
+
+/* =====================================================================
+   Skedio LIGHT THEME
+   Activated by adding `.skedio-light` to <html>. The Skedio UI uses many
+   hardcoded dark utility classes, so light mode remaps those specific
+   surfaces, neutral text, and borders. Colored accents (rose/amber/etc.)
+   and image-overlay scrims (bg-black/*) are intentionally left dark so
+   badges over artwork stay readable.
+   ===================================================================== */
+
+html.skedio-light body {
+  background-color: #f4f4f5;
+  color: #18181b;
+}
+
+/* ---- Surface backgrounds (dark hex -> light) ---- */
+html.skedio-light .bg-\[\#121212\] { background-color: #f4f4f5 !important; }
+html.skedio-light .bg-\[\#161616\] { background-color: #ffffff !important; }
+html.skedio-light .bg-\[\#181818\] { background-color: #ffffff !important; }
+html.skedio-light .bg-\[\#1a1a1a\] { background-color: #f0f0f2 !important; }
+html.skedio-light .bg-\[\#1c1c1c\] { background-color: #ffffff !important; }
+html.skedio-light .bg-\[\#1e1e1e\] { background-color: #ededf0 !important; }
+html.skedio-light .bg-\[\#202020\] { background-color: #e8e8ea !important; }
+html.skedio-light .bg-\[\#222\], html.skedio-light .bg-\[\#222222\] { background-color: #e8e8ea !important; }
+html.skedio-light .bg-\[\#2a2a2a\] { background-color: #e2e2e5 !important; }
+html.skedio-light .bg-\[\#2e2e2e\] { background-color: #dedee1 !important; }
+html.skedio-light .bg-\[\#262626\] { background-color: #e4e4e7 !important; }
+html.skedio-light .bg-\[\#333\], html.skedio-light .bg-\[\#333333\] { background-color: #d4d4d8 !important; }
+html.skedio-light .bg-\[\#444\] { background-color: #c4c4c8 !important; }
+html.skedio-light .via-\[\#1c1c1c\] { --tw-gradient-via-color: #ffffff !important; }
+html.skedio-light .to-\[\#1c1c1c\] { --tw-gradient-to: #ffffff !important; }
+
+/* Gradient grid line color used in trace/studio overlays */
+html.skedio-light .bg-\[linear-gradient\(to_right\2c \#262626_1px\2c transparent_1px\)\2c linear-gradient\(to_bottom\2c \#262626_1px\2c transparent_1px\)\] {
+  background-image:
+    linear-gradient(to right, #d4d4d8 1px, transparent 1px),
+    linear-gradient(to bottom, #d4d4d8 1px, transparent 1px) !important;
+}
+
+/* ---- Neutral foreground text (white -> near-black) ----
+   Primary text #111111, secondary text #444444. Solid (non-translucent)
+   colors so labels never wash out against light/white or tinted cards and
+   always clear WCAG AA contrast. */
+html.skedio-light .text-white { color: #111111 !important; }
+html.skedio-light .text-white\/80 { color: #1f1f1f !important; }
+html.skedio-light .text-white\/70 { color: #333333 !important; }
+html.skedio-light .text-white\/60 { color: #444444 !important; }
+html.skedio-light .text-white\/50 { color: #4a4a4a !important; }
+html.skedio-light .text-white\/40 { color: #555555 !important; }
+html.skedio-light .text-white\/35 { color: #5a5a5a !important; }
+html.skedio-light .text-white\/30 { color: #606060 !important; }
+html.skedio-light .text-white\/20 { color: #6b6b6b !important; }
+html.skedio-light .placeholder-white\/40::placeholder { color: #6b6b6b !important; }
+
+/* ---- Borders (white -> #D0D0D0 neutral, scaled by opacity) ---- */
+html.skedio-light .border-white\/5 { border-color: #e0e0e0 !important; }
+html.skedio-light .border-white\/10 { border-color: #d8d8d8 !important; }
+html.skedio-light .border-white\/15 { border-color: #d0d0d0 !important; }
+html.skedio-light .border-white\/20 { border-color: #c8c8c8 !important; }
+html.skedio-light .border-white\/25 { border-color: #c0c0c0 !important; }
+html.skedio-light .border-white\/30 { border-color: #b8b8b8 !important; }
+html.skedio-light .border-white\/40 { border-color: #a8a8a8 !important; }
+html.skedio-light .border-white { border-color: #111111 !important; }
+
+/* ---- Subtle white tint surfaces (white/x bg -> dark tint) ---- */
+html.skedio-light .bg-white\/5 { background-color: rgba(24,24,27,0.05) !important; }
+html.skedio-light .bg-white\/10 { background-color: rgba(24,24,27,0.07) !important; }
+html.skedio-light .bg-white\/15 { background-color: rgba(24,24,27,0.1) !important; }
+html.skedio-light .bg-white\/20 { background-color: rgba(24,24,27,0.12) !important; }
+
+/* ---- Primary buttons: bg-white + text-black -> dark button, light label ---- */
+html.skedio-light .bg-white { background-color: #18181b !important; }
+html.skedio-light .bg-white\/90:hover, html.skedio-light .hover\:bg-white\/90:hover { background-color: #2a2a2e !important; }
+html.skedio-light .bg-white.text-black,
+html.skedio-light .bg-white .text-black { color: #ffffff !important; }
+html.skedio-light .bg-white .fill-black { fill: #ffffff !important; }
+
+/* Keep white text on saturated solid accent buttons/pills (undo the neutral
+   flip when text-white sits ON a colored solid background) */
+html.skedio-light .bg-rose-600.text-white,
+html.skedio-light .bg-rose-500.text-white,
+html.skedio-light .bg-cyan-600.text-white,
+html.skedio-light .bg-rose-600 .text-white,
+html.skedio-light .bg-cyan-600 .text-white { color: #ffffff !important; }
+
+/* ---- Accent text on light surfaces: deepen for contrast ---- */
+html.skedio-light .text-amber-400,
+html.skedio-light .text-amber-300 { color: #b45309 !important; }
+html.skedio-light .text-sky-400 { color: #0369a1 !important; }
+html.skedio-light .text-cyan-400,
+html.skedio-light .text-cyan-300 { color: #0e7490 !important; }
+html.skedio-light .text-emerald-400,
+html.skedio-light .text-emerald-300 { color: #047857 !important; }
+html.skedio-light .text-violet-400 { color: #6d28d9 !important; }
+html.skedio-light .text-purple-400 { color: #7e22ce !important; }
+html.skedio-light .text-rose-400,
+html.skedio-light .text-rose-300 { color: #be123c !important; }
+
+/* Keep accent text bright when it sits on a dark scrim over artwork
+   (badges use bg-black/*) so it stays readable in light mode too. */
+html.skedio-light [class*="bg-black\/"] .text-white,
+html.skedio-light [class*="bg-black\/"].text-white { color: #ffffff !important; }
